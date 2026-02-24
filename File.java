@@ -4,7 +4,7 @@ class File {
     private final long maxSize; // in bytes
     private final java.util.Date creationTime;
     private java.util.Date modificationTime;
-    private long gebruiksperiode; // timeinterval between modificationTime and creationTime (both not included)
+    private long usagePeriod; // timeinterval between modificationTime and creationTime (both not included)
     private boolean writable;
 
     /**
@@ -12,11 +12,34 @@ class File {
      * @param name
      * @param size
      * @param writable
+     *
+     * @pre
+     *  - name:
+     *      only capitals, small letters, numbers or these symbols: . - _
+     *      and need to be atleast 1 char long
+     *      also case sensitive
+     *
+     * @post
+     *  - name is the name of the file
+     *  - size is the size of the file in bytes
+     *  - writable is the boolean wether the file is writable
      */
     public File (String name, int size, boolean writable) {
 
     }
 
+    /**
+     *
+     * @param name
+     *
+     * @pre
+     *  - name:
+     *      only capitals, small letters, numbers or these symbols: . - _
+     *      and need to be atleast 1 char long
+     *      also case sensitive
+     *
+     * @post name is the name of the file
+     */
     public File(String name) {
 
     }
@@ -43,6 +66,10 @@ class File {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
@@ -75,12 +102,12 @@ class File {
         this.modificationTime = modificationTime;
     }
 
-    public long getGebruiksperiode() {
-        return gebruiksperiode;
+    public long getUsagePeriod() {
+        return usagePeriod;
     }
 
-    public void setGebruiksperiode(long gebruiksperiode) {
-        this.gebruiksperiode = gebruiksperiode;
+    public void setUsagePeriod(long usagePeriod) {
+        this.usagePeriod = usagePeriod;
     }
 
     public boolean isWritable() {
@@ -91,4 +118,3 @@ class File {
         this.writable = writable;
     }
 }
-
