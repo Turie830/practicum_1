@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class FileTest {
 
@@ -30,4 +31,42 @@ public class FileTest {
         filesize = testFile.getSize();
         assertEquals(50, filesize);
     }
+
+
+
+
+        @Test
+        void testNameFilter() {
+            File f = new File("ab#c?.txt");
+            assertEquals("abc.txt", f.getName());
+        }
+
+        @Test
+        void testNameFilter2() {
+            File f = new File("");
+            assertEquals("defaultName", f.getName());
+        }
+
+        @Test
+        void testNameFilter3() {
+            File f = new File("%")
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
