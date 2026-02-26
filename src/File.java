@@ -19,7 +19,7 @@ import java.util.Date;
 class File {
     private String name;
     private long size; // in bytes
-    private final long maxSize; // in bytes
+    private final long maxSize = Long.MAX_VALUE; // in bytes
     private final java.util.Date creationTime;
     private java.util.Date modificationTime;
     private long usagePeriod; // timeinterval between modificationTime and creationTime (both not included)
@@ -59,24 +59,39 @@ class File {
      * @post name is the name of the file
      */
     public File(String name) {
-        if (isValidName(String naam) == True) {
-            this.name = name
-        }
-        else {
-            this.name = "defaultName"
+        if (isValidName(name) == true) {
+            this.name = name;
+        } else {
+            if (name == null) {
+                this.name = "defaultName";
+            } else {
+                StringBuilder result = new StringBuilder();
+                for (char c : name.toCharArray()) {
+                    if (isAllowed(c)) {
+                        result.append(c);
+                    }
+                }
+                this.name = result.toString();
+            }
         }
     }
 
-
-    /**
-     *
-      * @param naam
-     *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
-     *
-     */
-    public static boolean isValidName(String naam) {
-        return !naam.matches(".*[^A-Za-z0-9._-].*");
+        /**
+         *
+         * @param name
+         *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
+         *
+         */
+    public static boolean isValidName (String name) {
+        if (name == null || name.isEmpty()) return false;
+        return name.matches("[A-Za-z0-9._-]+");
     }
+
+
+
+
+
+
 
 
     /**
@@ -85,7 +100,7 @@ class File {
      * @pre enlargeSize > 0 and enlargeSize + getSize() < maxSize()
      */
     public void enlarge(int enlargeSize) {
-        size = getSize() + enlargeSize
+        size = getSize() + enlargeSize;
     }
 
     /**
@@ -94,23 +109,15 @@ class File {
      * @pre shortenSize > 0 and getSize - shortenSize > 0
      * */
     public void shorten(int shortenSize) {
-        size = getSize() - shortenSize
+        size = getSize() - shortenSize;
     }
 
     /**
      *
-     *
-     *
-     *
      * */
     public boolean hasOverlappingUsePeriod(File file1, File file2) {
-        if(file2.getModificationTime() == null){
-            return false;
-        }
-
         return file2.getCreationTime().before(file1.getModificationTime())
-                || file1.getCreationTime().before(file2.getModificationTime());
-        /* als file 2 begint voor file 1 eindigt is er overlap */
+                || file1.getCreationTime().before(file2.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
 
     }
 
