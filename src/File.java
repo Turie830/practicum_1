@@ -113,15 +113,31 @@ class File {
     /**
      *
      * */
-    public boolean hasOverlappingUsePeriod(File file) {
-        if (file.getModificationTime() == null){
-            return false;
+    public boolean hasOverlappingUsePeriod(File other) {
+        if (other == null) return false;
+
+        Date start1 = this.getCreationTime();
+        Date end1 = this.getModificationTime() != null ? this.getModificationTime() : new Date();
+        Date start2 = other.getCreationTime();
+        Date end2 = other.getModificationTime() != null ? other.getModificationTime() : new Date();
+
+        if (end1.before(start1) || end2.before(start2)){
+
+            Date tstart1 = start1;
+            Date tstart2 = start2;
+            Date tend1 = end1;
+            Date tend2 = end2;
+
+            start1 = tstart2;
+            start2 = tstart1;
+            end1 = tend2;
+            end2 = tend1;
+
         }
 
-        return file.getCreationTime().before(this.getModificationTime())
-                || this.getCreationTime().before(file.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
-
+        return start1.before(end2) && start2.before(end1);
     }
+
 
     /**
      *
