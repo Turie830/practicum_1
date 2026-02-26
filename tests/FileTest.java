@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -47,5 +48,19 @@ public class FileTest {
         assertEquals(100, size);
 
         assertTrue(testFile.isWritable());
+    }
+
+
+    @Test
+    public void testFilter1() {
+        File f = new File("ab#c?.txt");
+        assertEquals("abc.txt", f.getName());
+    }
+
+    @Test
+    public void testFilter2() {
+        File f = new File("");
+        assertEquals("defaultName", f.getName());
+
     }
 }

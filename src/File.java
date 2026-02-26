@@ -60,7 +60,7 @@ class File {
         creationTime = new Date();
         writable = true;
 
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
             this.name = "defaultName"; // default naam als name leeg is
         } else {
             StringBuilder result = new StringBuilder();
@@ -73,9 +73,8 @@ class File {
                 this.name = "defaultName";
             }
             else {
-                this.name = result.toString();
+                this.name = name;
             }
-
         }
     }
 
