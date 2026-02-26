@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /**
  * A class of files for creating files, involving a name, maxsize, ... TODO
  *
@@ -98,8 +100,14 @@ class File {
     /**
      *
      * */
-    public void hasOverlappingUsePeriod(File file) {
-        tijd1 = file.getCreationTime() + file.getUsagePeriod()      /* begintijd van file 2 moet hoger zijn dan tijd1, zo niet return true */
+    public boolean hasOverlappingUsePeriod(File file1, File file2) {
+        if(
+                file2.getCreationTime().before(file1.getModificationTime())
+                        || file1.getCreationTime().before(file2.getModificationTime())  ){
+            return true;
+        }
+        return false;/* als file 2 begint voor file 1 eindigt is er overlap */
+
     }
 
     /**
@@ -126,7 +134,7 @@ class File {
         return maxSize;
     }
 
-    public long getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
