@@ -44,6 +44,7 @@ class File {
      */
     public File (String name, int size, boolean writable) {
         creationTime = new Date();
+        this.size = size;
     }
 
     /**
