@@ -43,8 +43,10 @@ class File {
      *  - writable is the boolean wether the file is writable
      */
     public File (String name, int size, boolean writable) {
+        setName(name);
         creationTime = new Date();
         this.size = size;
+        this.writable = writable;
     }
 
     /**
@@ -57,26 +59,27 @@ class File {
      * @post name is the name of the file
      */
     public File(String name) {
-        creationTime = new Date();
-        writable = true;
+        this(name, 0, true);
+    }
 
+    public void setName(String name) {
         if (name == null || name.isEmpty()) {
-            this.name = "defaultName"; // default naam als name leeg is
+            this.name = "defaultName";
         } else {
             StringBuilder result = new StringBuilder();
-            for (char c : name.toCharArray()) { // check ieder char als het valid is
-                if (isValidName(c)) {
+            for (char c : name.toCharArray()) {
+                if (isValidChar(c)) {
                     result.append(c);
                 }
             }
-            if (result == null) {
+            if (result.isEmpty()) {
                 this.name = "defaultName";
-            }
-            else {
-                this.name = name;
+            } else {
+                this.name = result.toString();
             }
         }
     }
+
 
     /**
      *
@@ -84,7 +87,7 @@ class File {
      * @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
      *
      */
-    public static boolean isValidName(char c) {
+    public static boolean isValidChar(char c) {
         return (c >= 'A' && c <= 'Z') ||
                 (c >= 'a' && c <= 'z') ||
                 (c >= '0' && c <= '9') ||
@@ -129,16 +132,8 @@ class File {
 
     }
 
-    /**
-     *
-     * @return
-     */
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public long getSize() {
