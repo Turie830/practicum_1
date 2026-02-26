@@ -99,14 +99,18 @@ class File {
 
     /**
      *
+     *
+     *
+     *
      * */
     public boolean hasOverlappingUsePeriod(File file1, File file2) {
-        if(
-                file2.getCreationTime().before(file1.getModificationTime())
-                        || file1.getCreationTime().before(file2.getModificationTime())  ){
-            return true;
+        if(file2.getModificationTime() == null){
+            return false;
         }
-        return false;/* als file 2 begint voor file 1 eindigt is er overlap */
+
+        return file2.getCreationTime().before(file1.getModificationTime())
+                || file1.getCreationTime().before(file2.getModificationTime());
+        /* als file 2 begint voor file 1 eindigt is er overlap */
 
     }
 
