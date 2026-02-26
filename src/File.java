@@ -43,7 +43,7 @@ class File {
      *  - writable is the boolean wether the file is writable
      */
     public File (String name, int size, boolean writable) {
-
+        creationTime = new Date();
     }
 
     /**
@@ -59,6 +59,7 @@ class File {
      * @post name is the name of the file
      */
     public File(String name) {
+        creationTime = new Date();
         if (isValidName(String naam) == True) {
             this.name = name
         }
@@ -86,6 +87,7 @@ class File {
      */
     public void enlarge(int enlargeSize) {
         size = getSize() + enlargeSize;
+        modificationTime = new Date();
     }
 
     /**
@@ -95,14 +97,15 @@ class File {
      * */
     public void shorten(int shortenSize) {
         size = getSize() - shortenSize;
+        modificationTime = new Date();
     }
 
     /**
      *
      * */
-    public boolean hasOverlappingUsePeriod(File file1, File file2) {
-        return file2.getCreationTime().before(file1.getModificationTime())
-                || file1.getCreationTime().before(file2.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
+    public boolean hasOverlappingUsePeriod(File file) {
+        return file.getCreationTime().before(this.getModificationTime())
+                || this.getCreationTime().before(file.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
 
     }
 
