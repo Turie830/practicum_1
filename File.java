@@ -7,11 +7,10 @@
  *
  * @version 1.0
  *
- * TODO wat is dit????
- * @invar	The capacity of a tank is a positive number.
- * 			| isValidCapacity(getCapacity())
- * @invar	The contents of a tank is a positive number, less than or equal to the capacity of the tank.
- * 			| canHaveAsContents(getContents())
+ * TODO
+ * @invar   size must always be greater than zero
+ *
+ * @invar
  *
  */
 
@@ -58,7 +57,23 @@ class File {
      * @post name is the name of the file
      */
     public File(String name) {
+        if (isValidName(String naam) == True) {
+            this.name = name
+        }
+        else {
+            this.name = "defaultName"
+        }
+    }
 
+
+    /**
+     *
+      * @param naam
+     *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
+     *
+     */
+    public static boolean isValidName(String naam) {
+        return !naam.matches(".*[^A-Za-z0-9._-].*");
     }
 
 
