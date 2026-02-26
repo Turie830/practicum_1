@@ -17,7 +17,7 @@
 class File {
     private String name;
     private long size; // in bytes
-    private final long maxSize; // in bytes
+    private final long maxSize = Long.MAX_VALUE; // in bytes
     private final java.util.Date creationTime;
     private java.util.Date modificationTime;
     private long usagePeriod; // timeinterval between modificationTime and creationTime (both not included)
@@ -83,7 +83,7 @@ class File {
      * @pre enlargeSize > 0 and enlargeSize + getSize() < maxSize()
      */
     public void enlarge(int enlargeSize) {
-        size = getSize() + enlargeSize
+        size = getSize() + enlargeSize;
     }
 
     /**
@@ -92,7 +92,7 @@ class File {
      * @pre shortenSize > 0 and getSize - shortenSize > 0
      * */
     public void shorten(int shortenSize) {
-        size = getSize() - shortenSize
+        size = getSize() - shortenSize;
     }
 
     /**
