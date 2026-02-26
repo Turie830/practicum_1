@@ -78,17 +78,21 @@ class File {
 
 
     /**
+     * @param enlargeSize
      *
+     * @pre enlargeSize > 0 and enlargeSize + getSize() < maxSize()
      */
     public void enlarge(int enlargeSize) {
-
+        size = getSize() + enlargeSize
     }
 
     /**
+     * @param shortenSize
      *
+     * @pre shortenSize > 0 and getSize - shortenSize > 0
      * */
     public void shorten(int shortenSize) {
-
+        size = getSize() - shortenSize
     }
 
     /**
