@@ -49,7 +49,8 @@ public class FileTest {
 
         @Test
         void testNameFilter3() {
-            File f = new File("%")
+            File f = new File("%");
+
 
 
 
