@@ -43,7 +43,7 @@ class File {
      *  - writable is the boolean wether the file is writable
      */
     public File (String name, int size, boolean writable) {
-
+        creationTime = new Date();
     }
 
     /**
