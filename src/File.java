@@ -126,7 +126,7 @@ class File {
         return maxSize;
     }
 
-    public java.util.Date getCreationTime() {
+    public long getCreationTime() {
         return creationTime;
     }
 
