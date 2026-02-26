@@ -3,24 +3,22 @@ import java.util.Date;
 /**
  * A class of files for creating files, involving a name, maxsize, ... TODO
  *
- * @author  Obe Willaert
- * @author  Arthur Pintelon
- * @author  Mauro Devolder
- *
+ * @author Obe Willaert
+ * @author Arthur Pintelon
+ * @author Mauro Devolder
  * @version 1.0
- *
+ * <p>
  * TODO
- * @invar   size must always be greater than zero
- *
+ * @invar size must always be greater than zero
  * @invar
  *
  */
 
 class File {
-    private String name;
-    private long size; // in bytes
     private final long maxSize = Long.MAX_VALUE; // in bytes
     private final java.util.Date creationTime;
+    private String name;
+    private long size; // in bytes
     private java.util.Date modificationTime;
     private long usagePeriod; // timeinterval between modificationTime and creationTime (both not included)
     private boolean writable;
@@ -30,32 +28,25 @@ class File {
      * @param name
      * @param size
      * @param writable
-     *
-     * @pre
-     *  - name:
-     *      only capitals, small letters, numbers or these symbols: . - _
-     *      and need to be atleast 1 char long
-     *      also case sensitive
-     *
-     * @post
-     *  - name is the name of the file
-     *  - size is the size of the file in bytes
-     *  - writable is the boolean wether the file is writable
+     * @pre - name:
+     * only capitals, small letters, numbers or these symbols: . - _
+     * and need to be atleast 1 char long
+     * also case sensitive
+     * @post - name is the name of the file
+     * - size is the size of the file in bytes
+     * - writable is the boolean wether the file is writable
      */
-    public File (String name, int size, boolean writable) {
+    public File(String name, int size, boolean writable) {
         creationTime = new Date();
     }
 
     /**
      *
      * @param name
-     *
-     * @pre
-     *  - name:
-     *      only capitals, small letters, numbers or these symbols: . - _
-     *      and need to be atleast 1 char long
-     *      also case sensitive
-     *
+     * @pre - name:
+     * only capitals, small letters, numbers or these symbols: . - _
+     * and need to be atleast 1 char long
+     * also case sensitive
      * @post name is the name of the file
      */
     public File(String name) {
@@ -77,13 +68,13 @@ class File {
         }
     }
 
-        /**
-         *
-         * @param name
-         *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
-         *
-         */
-    public static boolean isValidName (String name) {
+    /**
+     *
+     * @param name
+     * @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
+     *
+     */
+    public static boolean isValidName(String name) {
         if (name == null || name.isEmpty()) return false;
         return name.matches("[A-Za-z0-9._-]+");
     }
@@ -91,25 +82,31 @@ class File {
 
     /**
      * @param enlargeSize
-     *
      * @pre enlargeSize > 0 and enlargeSize + getSize() < maxSize()
      */
     public void enlarge(int enlargeSize) {
-        size = getSize() + enlargeSize;
+        if (isWritable()) {
+            size = getSize() + enlargeSize;
+            modificationTime = new Date();
+        }
     }
 
     /**
      * @param shortenSize
-     *
      * @pre shortenSize > 0 and getSize - shortenSize > 0
-     * */
+     *
+     */
     public void shorten(int shortenSize) {
-        size = getSize() - shortenSize;
+        if (isWritable()) {
+            size = getSize() - shortenSize;
+            modificationTime = new Date();
+        }
     }
 
     /**
      *
-     * */
+     *
+     */
     public boolean hasOverlappingUsePeriod(File file) {
         return file.getCreationTime().before(this.getModificationTime())
                 || this.getCreationTime().before(file.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
