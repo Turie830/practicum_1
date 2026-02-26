@@ -1,3 +1,20 @@
+/**
+ * A class of files for creating files, involving a name, maxsize, ... TODO
+ *
+ * @author  Obe Willaert
+ * @author  Arthur Pintelon
+ * @author  Mauro Devolder
+ *
+ * @version 1.0
+ *
+ * TODO wat is dit????
+ * @invar	The capacity of a tank is a positive number.
+ * 			| isValidCapacity(getCapacity())
+ * @invar	The contents of a tank is a positive number, less than or equal to the capacity of the tank.
+ * 			| canHaveAsContents(getContents())
+ *
+ */
+
 class File {
     private String name;
     private long size; // in bytes
