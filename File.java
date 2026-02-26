@@ -80,7 +80,7 @@ class File {
      *
      * */
     public void hasOverlappingUsePeriod(File file) {
-
+        tijd1 = file.getCreationTime() + file.getUsagePeriod()      /* begintijd van file 2 moet hoger zijn dan tijd1, zo niet return true */
     }
 
     /**
