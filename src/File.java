@@ -3,13 +3,15 @@ import java.util.Date;
 /**
  * A class of files for creating files, involving a name, maxsize, ... TODO
  *
- * @author Obe Willaert
- * @author Arthur Pintelon
- * @author Mauro Devolder
+ * @author  Obe Willaert
+ * @author  Arthur Pintelon
+ * @author  Mauro Devolder
+ *
  * @version 1.0
- * <p>
+ *
  * TODO
- * @invar size must always be greater than zero
+ * @invar   size must always be greater than zero
+ *
  * @invar
  *
  */
@@ -28,15 +30,19 @@ class File {
      * @param name
      * @param size
      * @param writable
-     * @pre - name:
-     * only capitals, small letters, numbers or these symbols: . - _
-     * and need to be atleast 1 char long
-     * also case sensitive
-     * @post - name is the name of the file
-     * - size is the size of the file in bytes
-     * - writable is the boolean wether the file is writable
+     *
+     * @pre
+     *  - name:
+     *      only capitals, small letters, numbers or these symbols: . - _
+     *      and need to be atleast 1 char long
+     *      also case sensitive
+     *
+     * @post
+     *  - name is the name of the file
+     *  - size is the size of the file in bytes
+     *  - writable is the boolean wether the file is writable
      */
-    public File(String name, int size, boolean writable) {
+    public File (String name, int size, boolean writable) {
         creationTime = new Date();
     }
 
@@ -69,7 +75,6 @@ class File {
             }
 
         }
-
     }
 
     /**
@@ -88,25 +93,31 @@ class File {
 
     /**
      * @param enlargeSize
+     *
      * @pre enlargeSize > 0 and enlargeSize + getSize() < maxSize()
      */
     public void enlarge(int enlargeSize) {
-        size = getSize() + enlargeSize;
+        if (isWritable()) {
+            size = getSize() + enlargeSize;
+            modificationTime = new Date();
+        }
     }
 
     /**
      * @param shortenSize
-     * @pre shortenSize > 0 and getSize - shortenSize > 0
      *
-     */
+     * @pre shortenSize > 0 and getSize - shortenSize > 0
+     * */
     public void shorten(int shortenSize) {
-        size = getSize() - shortenSize;
+        if (isWritable()) {
+            size = getSize() - shortenSize;
+            modificationTime = new Date();
+        }
     }
 
     /**
      *
-     *
-     */
+     * */
     public boolean hasOverlappingUsePeriod(File file) {
         if (file.getModificationTime() == null){
             return false;
