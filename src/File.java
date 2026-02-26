@@ -43,7 +43,7 @@ class File {
      *  - writable is the boolean wether the file is writable
      */
     public File (String name, int size, boolean writable) {
-        creationTime = new Date();
+
     }
 
     /**
@@ -60,23 +60,32 @@ class File {
      */
     public File(String name) {
         creationTime = new Date();
-        if (isValidName(String naam) == True) {
-            this.name = name
-        }
-        else {
-            this.name = "defaultName"
+        if (isValidName(name) == true) {
+            this.name = name;
+        } else {
+            if (name == null) {
+                this.name = "defaultName";
+            } else {
+                StringBuilder result = new StringBuilder();
+                for (char c : name.toCharArray()) {
+                    if (isAllowed(c)) {
+                        result.append(c);
+                    }
+                }
+                this.name = result.toString();
+            }
         }
     }
 
-
-    /**
-     *
-      * @param naam
-     *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
-     *
-     */
-    public static boolean isValidName(String naam) {
-        return !naam.matches(".*[^A-Za-z0-9._-].*");
+        /**
+         *
+         * @param name
+         *  @return True als de naam aan de vereisten voldoet, False als het er niet aan voldoet
+         *
+         */
+    public static boolean isValidName (String name) {
+        if (name == null || name.isEmpty()) return false;
+        return name.matches("[A-Za-z0-9._-]+");
     }
 
 
@@ -87,7 +96,6 @@ class File {
      */
     public void enlarge(int enlargeSize) {
         size = getSize() + enlargeSize;
-        modificationTime = new Date();
     }
 
     /**
@@ -97,7 +105,6 @@ class File {
      * */
     public void shorten(int shortenSize) {
         size = getSize() - shortenSize;
-        modificationTime = new Date();
     }
 
     /**
