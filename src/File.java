@@ -44,6 +44,7 @@ class File {
      */
     public File (String name, int size, boolean writable) {
         creationTime = new Date();
+        this.size = size;
     }
 
     /**
@@ -57,6 +58,7 @@ class File {
      */
     public File(String name) {
         creationTime = new Date();
+        writable = true;
 
         if (name == null) {
             this.name = "defaultName"; // default naam als name leeg is

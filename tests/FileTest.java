@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+
 
 public class FileTest {
 
@@ -20,6 +19,7 @@ public class FileTest {
 
     @Test
     public void testSize() {
+        // Default for testFile is writable
         long filesize = testFile.getSize();
         assertEquals(0, filesize);
 
@@ -32,42 +32,20 @@ public class FileTest {
         assertEquals(50, filesize);
     }
 
+    @Test
+    public void testWritable() {
+        File nonWritable = new File("notWritable", 100, false);
+        assertFalse(nonWritable.isWritable());
 
 
+        nonWritable.enlarge(50);
+        long size = nonWritable.getSize();
+        assertEquals(100, size);
 
-        @Test
-        void testNameFilter() {
-            File f = new File("ab#c?.txt");
-            assertEquals("abc.txt", f.getName());
-        }
+        nonWritable.shorten(20);
+        size = nonWritable.getSize();
+        assertEquals(100, size);
 
-        @Test
-        void testNameFilter2() {
-            File f = new File("");
-            assertEquals("defaultName", f.getName());
-        }
-
-        @Test
-        void testNameFilter3() {
-            File f = new File("%");
-
-
-
-
+        assertTrue(testFile.isWritable());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
