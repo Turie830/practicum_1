@@ -15,7 +15,7 @@ public class FileTest {
 
     @Test
     public void testName() {
-        // Case 1.
+        //TODO
     }
 
     @Test
@@ -38,14 +38,14 @@ public class FileTest {
         File nonWritable = new File("notWritable", 100, false);
         assertFalse(nonWritable.isWritable());
 
+        assertThrows(NotWritableException.class, () -> nonWritable.enlarge(50));
+        assertEquals(100, nonWritable.getSize());
 
-        nonWritable.enlarge(50);
-        long size = nonWritable.getSize();
-        assertEquals(100, size);
+        assertThrows(NotWritableException.class, () -> nonWritable.shorten(20));
+        assertEquals(100, nonWritable.getSize());
 
-        nonWritable.shorten(20);
-        size = nonWritable.getSize();
-        assertEquals(100, size);
+        assertThrows(NotWritableException.class, () -> nonWritable.setName("SHOULD NOT WORK"));
+        assertEquals("notWritable", nonWritable.getName());
 
         assertTrue(testFile.isWritable());
     }
