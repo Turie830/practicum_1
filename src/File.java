@@ -14,7 +14,7 @@ import java.util.Date;
  * @invar If getModificationTime() != null then getModificationTime().after(getCreationTime())
  */
 public class File {
-    private final long maxSize = Long.MAX_VALUE; // in bytes
+    private static final long maxSize = Long.MAX_VALUE; // in bytes
     private final java.util.Date creationTime;
     private String name;
     private long size; // in bytes
@@ -166,11 +166,11 @@ public class File {
         return size;
     }
 
-    public void setSize(long size) {
+    private void setSize(long size) {
         this.size = size;
     }
 
-    public long getMaxSize() {
+    public static long getMaxSize() {
         return maxSize;
     }
 
@@ -182,15 +182,16 @@ public class File {
         return modificationTime;
     }
 
-    public void setModificationTime(java.util.Date modificationTime) {
+    private void setModificationTime(java.util.Date modificationTime) {
         this.modificationTime = modificationTime;
     }
 
     public long getUsagePeriod() {
-        return usagePeriod;
+        if (modificationTime == null) return 0;
+        return modificationTime.getTime() - creationTime.getTime();
     }
 
-    public void setUsagePeriod(long usagePeriod) {
+    private void setUsagePeriod(long usagePeriod) {
         this.usagePeriod = usagePeriod;
     }
 
