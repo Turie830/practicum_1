@@ -15,7 +15,23 @@ public class FileTest {
 
     @Test
     public void testName() {
-        //TODO
+        assertEquals("TestFile", testFile.getName());
+
+        File f1 = new File("ab#c?.txt");
+        assertEquals("abc.txt", f1.getName());
+
+        File f2 = new File("");
+        assertEquals("defaultName", f2.getName());
+
+        File f3 = new File(null, 0, true);
+        assertEquals("defaultName", f3.getName());
+
+
+        assertNull(testFile.getModificationTime());
+        testFile.setName("A#B?.txt");
+        assertEquals("AB.txt", testFile.getName());
+        assertNotNull(testFile.getModificationTime());
+        assertTrue(testFile.getModificationTime().after(testFile.getCreationTime())); //modificationTime > creationTime
     }
 
     @Test
@@ -51,16 +67,5 @@ public class FileTest {
     }
 
 
-    @Test
-    public void testFilter1() {
-        File f = new File("ab#c?.txt");
-        assertEquals("abc.txt", f.getName());
-    }
 
-    @Test
-    public void testFilter2() {
-        File f = new File("");
-        assertEquals("defaultName", f.getName());
-
-    }
 }
