@@ -138,9 +138,8 @@ public class File {
             return false;
         }
 
-        return file.getCreationTime().before(this.getModificationTime())
-                || this.getCreationTime().before(file.getModificationTime());/* als file 2 begint voor file 1 eindigt is er overlap */
-
+        return this.getCreationTime().before(file.getModificationTime())
+                && file.getCreationTime().before(this.getModificationTime());
     }
 
     public String getName() {
