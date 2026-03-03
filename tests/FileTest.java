@@ -83,3 +83,4 @@ public class FileTest {
 
         assertTrue(f1.hasOverlappingUsePeriod(f2));
     }
+}
