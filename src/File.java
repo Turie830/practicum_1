@@ -129,13 +129,17 @@ public class File {
     /**
      * Checks whether the use period of this file overlaps with the given file.
      *
-     * @param file the other file
+     * @param f2 the other file
      * @return true if the use periods overlap else false
      */
-    public boolean hasOverlappingUsePeriod(File file) {
+    public boolean hasOverlappingUsePeriod(File other) {
 
-        return this.getCreationTime().before(file.getModificationTime())
-                && file.getCreationTime().before(this.getModificationTime());
+        if (this.getModificationTime() == null || other.getModificationTime() == null) {
+            return false;
+        }
+
+        return this.getCreationTime().before(other.getModificationTime())
+                && other.getCreationTime().before(this.getModificationTime());
     }
 
     public String getName() {

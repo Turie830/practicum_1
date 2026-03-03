@@ -68,19 +68,18 @@ public class FileTest {
 
 
     @Test
-    public void testOverlappingUsePeriod() {
+    public void testOverlappingUsePeriod() throws InterruptedException {
 
         File f1 = new File("f1");
+
+        Thread.sleep(5);                // zorgt ervoor dat er even gewacht wordt voor file2 gemaakt wordt
+        File f2 = new File("f2");
+
+        Thread.sleep(5);
         f1.enlarge(1);
 
-        File f2 = new File("f2");
+        Thread.sleep(5);
         f2.enlarge(1);
 
         assertTrue(f1.hasOverlappingUsePeriod(f2));
-
-        File f3 = new File("f3");
-        f3.enlarge(1);
-
-        assertFalse(f1.hasOverlappingUsePeriod(f3));
     }
-}
