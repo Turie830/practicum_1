@@ -133,7 +133,8 @@ public class File {
      * @return true if the use periods overlap else false
      */
     public boolean hasOverlappingUsePeriod(File file) {
-        if (file.getModificationTime() == null) {
+
+        if (this.getModificationTime() == null || file.getModificationTime() == null) {
             return false;
         }
 
