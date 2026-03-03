@@ -83,4 +83,22 @@ public class FileTest {
 
         assertTrue(f1.hasOverlappingUsePeriod(f2));
     }
+
+    @Test
+    public void testNonOverlappingUsePeriod() throws InterruptedException {
+
+        File f1 = new File("f1");
+
+        Thread.sleep(5);
+        f1.enlarge(1);          // f1 use period happens here
+
+        Thread.sleep(20);       // gap: ensures f1's use period is fully before f2's
+
+        File f2 = new File("f2");
+
+        Thread.sleep(5);
+        f2.enlarge(1);          // f2 use period happens here
+
+        assertFalse(f1.hasOverlappingUsePeriod(f2));
+    }
 }
