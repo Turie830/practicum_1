@@ -92,7 +92,7 @@ public class FileTest {
         Thread.sleep(5);
         f1.enlarge(1);          // f1 use period happens here
 
-        Thread.sleep(20);       // gap: ensures f1's use period is fully before f2's
+        Thread.sleep(20);       // gap ensures f1's use period is fully before f2's
 
         File f2 = new File("f2");
 
