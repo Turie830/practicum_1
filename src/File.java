@@ -134,10 +134,6 @@ public class File {
      */
     public boolean hasOverlappingUsePeriod(File file) {
 
-        if (this.getModificationTime() == null || file.getModificationTime() == null) {
-            return false;
-        }
-
         return this.getCreationTime().before(file.getModificationTime())
                 && file.getCreationTime().before(this.getModificationTime());
     }
