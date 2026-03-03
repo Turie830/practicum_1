@@ -129,7 +129,7 @@ public class File {
     /**
      * Checks whether the use period of this file overlaps with the given file.
      *
-     * @param f2 the other file
+     * @param other the other file
      * @return true if the use periods overlap else false
      */
     public boolean hasOverlappingUsePeriod(File other) {
