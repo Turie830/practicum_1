@@ -67,5 +67,20 @@ public class FileTest {
     }
 
 
+    @Test
+    public void testOverlappingUsePeriod() {
 
+        File f1 = new File("f1");
+        f1.enlarge(1);
+
+        File f2 = new File("f2");
+        f2.enlarge(1);
+
+        assertTrue(f1.hasOverlappingUsePeriod(f2));
+
+        File f3 = new File("f3");
+        f3.enlarge(1);
+
+        assertFalse(f1.hasOverlappingUsePeriod(f3));
+    }
 }
