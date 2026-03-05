@@ -1,7 +1,6 @@
 import java.util.Date;
 
 /**
- * test
  * A class of files in a file system
  *
  * @author Obe Willaert
